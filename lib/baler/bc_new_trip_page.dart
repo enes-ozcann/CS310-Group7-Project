@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
-import '../widgets/shared_widgets.dart';
+import '../ab_alara/ab_theme.dart';
+import 'bc_shared_widgets.dart';
 
 class NewTripPage extends StatefulWidget {
   final VoidCallback onBack;
@@ -31,7 +31,7 @@ class _NewTripPageState extends State<NewTripPage> {
   }
 
   String dateLabel(DateTime? date) {
-    if (date == null) return 'Tarih seçin';
+    if (date == null) return 'Select date';
     return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
@@ -65,7 +65,7 @@ class _NewTripPageState extends State<NewTripPage> {
             TextButton.icon(
               onPressed: widget.onBack,
               icon: const Icon(Icons.arrow_back, size: 16),
-              label: const Text('Gezilerime Dön'),
+              label: const Text('Back to My Trips'),
               style: TextButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: AppColors.text,
@@ -75,7 +75,7 @@ class _NewTripPageState extends State<NewTripPage> {
               ),
             ),
             const Spacer(),
-            const SectionPill('Gezi Planlama', light: true),
+            const SectionPill('Trip Planning', light: true),
           ],
         ),
         const SizedBox(height: 13),
@@ -84,41 +84,41 @@ class _NewTripPageState extends State<NewTripPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Yeni Gezi Oluştur', style: TextStyle(color: AppColors.navy, fontSize: 22, fontWeight: FontWeight.w900)),
+              const Text('Create New Trip', style: TextStyle(color: AppColors.navy, fontSize: 22, fontWeight: FontWeight.w900)),
               const SizedBox(height: 5),
-              const Text('Hedef şehir, tarih aralığı ve bütçenizi belirleyin; smartPack valiz ve harcama listenizi hazırlasın.', style: TextStyle(color: AppColors.muted, fontSize: 11, height: 1.35)),
+              const Text('Set destination city, date range, and budget; smartPack will prepare your packing and expense lists.', style: TextStyle(color: AppColors.muted, fontSize: 11, height: 1.35)),
               const SizedBox(height: 18),
-              const _FieldLabel('HIZLI POPÜLER ŞEHİR SEÇİMİ'),
+              const _FieldLabel('POPULAR CITIES'),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  _CityChoice(name: 'Roma', selected: selectedCity == 'Roma', onTap: () => chooseCity('Roma', 'İtalya')),
-                  _CityChoice(name: 'Paris', selected: selectedCity == 'Paris', onTap: () => chooseCity('Paris', 'Fransa')),
-                  _CityChoice(name: 'Barcelona', selected: selectedCity == 'Barcelona', onTap: () => chooseCity('Barcelona', 'İspanya')),
-                  _CityChoice(name: 'Tokyo', selected: selectedCity == 'Tokyo', onTap: () => chooseCity('Tokyo', 'Japonya')),
-                  _CityChoice(name: 'İstanbul', selected: selectedCity == 'İstanbul', onTap: () => chooseCity('İstanbul', 'Türkiye')),
+                  _CityChoice(name: 'Rome', selected: selectedCity == 'Rome', onTap: () => chooseCity('Rome', 'Italy')),
+                  _CityChoice(name: 'Paris', selected: selectedCity == 'Paris', onTap: () => chooseCity('Paris', 'France')),
+                  _CityChoice(name: 'Barcelona', selected: selectedCity == 'Barcelona', onTap: () => chooseCity('Barcelona', 'Spain')),
+                  _CityChoice(name: 'Tokyo', selected: selectedCity == 'Tokyo', onTap: () => chooseCity('Tokyo', 'Japan')),
+                  _CityChoice(name: 'Istanbul', selected: selectedCity == 'Istanbul', onTap: () => chooseCity('Istanbul', 'Turkey')),
                 ],
               ),
               const SizedBox(height: 18),
-              _FieldLabel('GEZİ ADI', required: true),
+              _FieldLabel('TRIP NAME', required: true),
               const SizedBox(height: 6),
-              _TextInput(controller: nameController, hint: 'Örn: Roma Kaçamağı 2025, Paris Balayı'),
+              _TextInput(controller: nameController, hint: 'e.g. Rome Getaway 2025, Paris Honeymoon'),
               const SizedBox(height: 16),
-              _FieldLabel('HEDEF ŞEHİR', required: true),
+              _FieldLabel('DESTINATION CITY', required: true),
               const SizedBox(height: 6),
-              _TextInput(controller: cityController, hint: 'Örn: Roma', icon: Icons.location_on_outlined),
+              _TextInput(controller: cityController, hint: 'e.g. Rome', icon: Icons.location_on_outlined),
               const SizedBox(height: 16),
-              _FieldLabel('ÜLKE', required: true),
+              _FieldLabel('COUNTRY', required: true),
               const SizedBox(height: 6),
-              _TextInput(controller: countryController, hint: 'Örn: İtalya'),
+              _TextInput(controller: countryController, hint: 'e.g. Italy'),
               const SizedBox(height: 16),
-              _FieldLabel('BAŞLANGIÇ TARİHİ', required: true),
+              _FieldLabel('START DATE', required: true),
               const SizedBox(height: 6),
               _DateInput(label: dateLabel(startDate), onTap: () => pickDate(true)),
               const SizedBox(height: 16),
-              _FieldLabel('BİTİŞ TARİHİ', required: true),
+              _FieldLabel('END DATE', required: true),
               const SizedBox(height: 6),
               _DateInput(label: dateLabel(endDate), onTap: () => pickDate(false)),
               const SizedBox(height: 17),
@@ -132,11 +132,11 @@ class _NewTripPageState extends State<NewTripPage> {
                       children: [
                         Icon(Icons.currency_exchange, color: AppColors.teal, size: 17),
                         SizedBox(width: 8),
-                        Text('BAŞLANGIÇ BÜTÇESİ & PARA BİRİMİ', style: TextStyle(color: AppColors.navy, fontSize: 10, fontWeight: FontWeight.w900)),
+                        Text('INITIAL BUDGET & CURRENCY', style: TextStyle(color: AppColors.navy, fontSize: 10, fontWeight: FontWeight.w900)),
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const _FieldLabel('PARA BİRİMİ'),
+                    const _FieldLabel('CURRENCY'),
                     const SizedBox(height: 7),
                     Row(
                       children: ['€', r'$', '฿', '£'].map((symbol) {
@@ -160,7 +160,7 @@ class _NewTripPageState extends State<NewTripPage> {
                       }).toList(),
                     ),
                     const SizedBox(height: 12),
-                    const _FieldLabel('TOPLAM BAŞLANGIÇ BÜTÇESİ'),
+                    const _FieldLabel('TOTAL INITIAL BUDGET'),
                     const SizedBox(height: 6),
                     TextField(
                       controller: budgetController,
@@ -175,7 +175,7 @@ class _NewTripPageState extends State<NewTripPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text('* Bu bütçe daha sonra Bütçe sekmesindeki kalem ikonu ile her zaman güncellenebilir.', style: TextStyle(color: AppColors.muted, fontSize: 9, height: 1.35)),
+                    const Text('* This budget can always be updated later from the Budget tab using the edit icon.', style: TextStyle(color: AppColors.muted, fontSize: 9, height: 1.35)),
                   ],
                 ),
               ),
@@ -185,7 +185,7 @@ class _NewTripPageState extends State<NewTripPage> {
                 child: FilledButton.icon(
                   onPressed: createTrip,
                   icon: const Icon(Icons.auto_awesome, size: 17),
-                  label: const Text('Create Trip (Gezimi Oluştur)'),
+                  label: const Text('Create Trip'),
                   style: FilledButton.styleFrom(
                     backgroundColor: AppColors.teal,
                     foregroundColor: Colors.white,
@@ -216,12 +216,12 @@ class _NewTripPageState extends State<NewTripPage> {
         startDate == null ||
         endDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Lütfen zorunlu alanları doldurun.')),
+        const SnackBar(content: Text('Please fill in all required fields.')),
       );
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Gezi oluşturuldu. (Demo)')),
+      const SnackBar(content: Text('Trip created successfully. (Demo)')),
     );
   }
 }

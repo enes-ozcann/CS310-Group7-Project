@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
-import '../widgets/shared_widgets.dart';
+import '../ab_alara/ab_theme.dart';
+import 'bc_shared_widgets.dart';
 
 class ArchivePage extends StatefulWidget {
   const ArchivePage({super.key});
@@ -22,15 +22,15 @@ class _ArchivePageState extends State<ArchivePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              SectionPill('Geçmiş Geziler Arşivi'),
+              SectionPill('Past Trips Archive'),
               SizedBox(height: 8),
               Text(
-                'Tamamlanmış Gezi Arşivi',
+                'Completed Trips Archive',
                 style: TextStyle(color: AppColors.navy, fontSize: 21, fontWeight: FontWeight.w900),
               ),
               SizedBox(height: 5),
               Text(
-                'Geçmiş seyahatlerinizin harcamalarını, gezilen yerlerini ve valiz kayıtlarını inceleyin ya da geziyi yeniden aktifleştirin.',
+                'Review expenses, visited places, and packing records of past journeys or reactivate trips.',
                 style: TextStyle(color: AppColors.muted, fontSize: 11, height: 1.35),
               ),
             ],
@@ -47,20 +47,20 @@ class _ArchivePageState extends State<ArchivePage> {
                 children: [
                   Stack(
                     children: [
-                      const PlaceholderPhoto(label: 'Barselona Yaz Tatili 2024', height: 155),
+                      const PlaceholderPhoto(label: 'Barcelona Summer Holiday 2024', height: 155),
                       Positioned(
                         top: 12,
                         right: 12,
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
                           decoration: BoxDecoration(color: AppColors.navy, borderRadius: BorderRadius.circular(20)),
-                          child: const Text('Tamamlandı', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                          child: const Text('Completed', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                         ),
                       ),
                       const Positioned(
                         left: 13,
                         bottom: 10,
-                        child: Text('📍 Barcelona, İspanya   ▢  2024-08-14 - 2024-08-20', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700, shadows: [Shadow(color: Colors.black87, blurRadius: 5)])),
+                        child: Text('Barcelona, Spain • 2024-08-14 - 2024-08-20', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700, shadows: [Shadow(color: Colors.black87, blurRadius: 5)])),
                       ),
                     ],
                   ),
@@ -77,7 +77,7 @@ class _ArchivePageState extends State<ArchivePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('TOPLAM HARCAMA', style: TextStyle(color: AppColors.muted, fontSize: 9)),
+                                    Text('TOTAL EXPENSE', style: TextStyle(color: AppColors.muted, fontSize: 9)),
                                     SizedBox(height: 4),
                                     Text('€920.00', style: TextStyle(color: AppColors.navy, fontSize: 14, fontWeight: FontWeight.w900)),
                                   ],
@@ -87,9 +87,9 @@ class _ArchivePageState extends State<ArchivePage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('GEZİLEN YER SAYISI', style: TextStyle(color: AppColors.muted, fontSize: 9)),
+                                    Text('VISITED PLACES', style: TextStyle(color: AppColors.muted, fontSize: 9)),
                                     SizedBox(height: 4),
-                                    Text('2 Mekan', style: TextStyle(color: AppColors.tealDark, fontSize: 14, fontWeight: FontWeight.w900)),
+                                    Text('2 Places', style: TextStyle(color: AppColors.tealDark, fontSize: 14, fontWeight: FontWeight.w900)),
                                   ],
                                 ),
                               ),
@@ -103,10 +103,10 @@ class _ArchivePageState extends State<ArchivePage> {
                               child: OutlinedButton.icon(
                                 onPressed: () => setState(() => showTrip = false),
                                 icon: const Icon(Icons.history, size: 15),
-                                label: const Text('Arşivden Çıkar', style: TextStyle(fontSize: 10)),
+                                label: const Text('Unarchive', style: TextStyle(fontSize: 10)),
                                 style: OutlinedButton.styleFrom(
-                                  foregroundColor: AppColors.text,
-                                  side: const BorderSide(color: AppColors.border),
+                                  foregroundColor: AppColors.textPrimary,
+                                  side: const BorderSide(color: AppColors.cardBorder),
                                   padding: const EdgeInsets.symmetric(vertical: 12),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                 ),
@@ -118,13 +118,13 @@ class _ArchivePageState extends State<ArchivePage> {
                                 onPressed: () => showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: const Text('Gezi Detayları'),
-                                    content: const Text('Barselona Yaz Tatili 2024\\n\\nToplam harcama: €920.00\\nGezilen yer: 2 Mekan'),
-                                    actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Kapat'))],
+                                    title: const Text('Trip Details'),
+                                    content: const Text('Barcelona Summer Holiday 2024\n\nTotal Expense: €920.00\nVisited Places: 2 Places'),
+                                    actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
                                   ),
                                 ),
                                 icon: const Icon(Icons.visibility_outlined, size: 15),
-                                label: const Text('Detayları Gör', style: TextStyle(fontSize: 10)),
+                                label: const Text('View Details', style: TextStyle(fontSize: 10)),
                                 style: FilledButton.styleFrom(
                                   backgroundColor: AppColors.teal,
                                   foregroundColor: Colors.white,
@@ -147,7 +147,7 @@ class _ArchivePageState extends State<ArchivePage> {
             child: Center(
               child: Padding(
                 padding: EdgeInsets.all(20),
-                child: Text('Arşivde gezi bulunmuyor.', style: TextStyle(color: AppColors.muted)),
+                child: Text('No archived trips found.', style: TextStyle(color: AppColors.muted)),
               ),
             ),
           ),

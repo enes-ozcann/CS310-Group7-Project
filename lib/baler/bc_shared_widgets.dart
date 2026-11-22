@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../main.dart';
+import '../ab_alara/ab_theme.dart';
+import '../ne_nehir/ne_main.dart';
 
 class SmartPackAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SmartPackAppBar({super.key});
@@ -38,22 +39,16 @@ class SmartPackAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.layers_outlined, color: AppColors.muted),
+          tooltip: 'Log Out',
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+              (route) => false,
+            );
+          },
+          icon: const Icon(Icons.logout_rounded, color: AppColors.muted),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
-          child: CircleAvatar(
-            radius: 15,
-            backgroundColor: const Color(0xFFE9EEF7),
-            child: const Icon(Icons.person, color: AppColors.navy, size: 19),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.logout, color: AppColors.muted, size: 19),
-        ),
-        const SizedBox(width: 5),
       ],
     );
   }
@@ -72,30 +67,49 @@ class SmartPackBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      height: 64,
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      elevation: 4,
-      selectedIndex: selectedIndex.clamp(0, 2),
+      selectedIndex: selectedIndex,
       onDestinationSelected: onTap,
-      indicatorColor: const Color(0xFFE3F7F3),
+      backgroundColor: Colors.white,
+      indicatorColor: AppColors.tealLight,
       destinations: const [
         NavigationDestination(
           icon: Icon(Icons.explore_outlined),
           selectedIcon: Icon(Icons.explore, color: AppColors.teal),
-          label: 'Keşfet',
+          label: 'Explore',
         ),
         NavigationDestination(
           icon: Icon(Icons.luggage_outlined),
           selectedIcon: Icon(Icons.luggage, color: AppColors.teal),
-          label: 'Gezilerim',
+          label: 'My Trips',
         ),
         NavigationDestination(
           icon: Icon(Icons.archive_outlined),
           selectedIcon: Icon(Icons.archive, color: AppColors.teal),
-          label: 'Arşiv',
+          label: 'Archive',
         ),
       ],
+    );
+  }
+}
+
+class PageCard extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+
+  const PageCard({super.key, required this.child, this.padding});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: const BorderSide(color: AppColors.cardBorder, width: 1),
+      ),
+      child: Padding(
+        padding: padding ?? const EdgeInsets.all(16),
+        child: child,
+      ),
     );
   }
 }
@@ -104,22 +118,22 @@ class SectionPill extends StatelessWidget {
   final String text;
   final bool light;
 
-  const SectionPill(this.text, {super.key, this.light = false});
+  const SectionPill(this.text, {super.key, this.light = true});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: light ? Colors.white : AppColors.navy,
-        borderRadius: BorderRadius.circular(30),
+        color: light ? AppColors.tealLight : AppColors.teal,
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         text,
         style: TextStyle(
           color: light ? AppColors.tealDark : Colors.white,
           fontSize: 10,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
@@ -130,73 +144,37 @@ class PlaceholderPhoto extends StatelessWidget {
   final String label;
   final double height;
 
-  const PlaceholderPhoto({
-    super.key,
-    required this.label,
-    this.height = 160,
-  });
+  const PlaceholderPhoto({super.key, required this.label, required this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
       width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF8CCDD7), Color(0xFF477F99), Color(0xFF243B55)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+      decoration: BoxDecoration(
+        color: AppColors.tealLight,
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          const Positioned(
-            right: 22,
-            top: 20,
-            child: Icon(Icons.location_city, color: Colors.white24, size: 92),
-          ),
+          const Icon(Icons.landscape, size: 64, color: AppColors.teal),
           Positioned(
-            left: 14,
             bottom: 12,
-            child: Text(
-              label,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 19,
-                shadows: [Shadow(color: Colors.black54, blurRadius: 8)],
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.black45,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                label,
+                style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class PageCard extends StatelessWidget {
-  final Widget child;
-  final EdgeInsetsGeometry padding;
-
-  const PageCard({
-    super.key,
-    required this.child,
-    this.padding = const EdgeInsets.all(16),
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: padding,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: const [
-          BoxShadow(color: Color(0x18000000), blurRadius: 12, offset: Offset(0, 5)),
-        ],
-      ),
-      child: child,
     );
   }
 }
