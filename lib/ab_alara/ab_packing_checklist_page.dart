@@ -67,10 +67,9 @@ class _PackingChecklistPageState extends State<PackingChecklistPage> {
                                   color: GeneralStyle.muted)),
                           const SizedBox(height: 8),
                           Row(children: [
-                            Text('$packed of ${items.length} packed',
+                            Expanded(child: Text('$packed of ${items.length} packed',
                                 style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                            const Spacer(),
+                                    fontSize: 20, fontWeight: FontWeight.bold))),
                             Text('${(progress * 100).round()}%',
                                 style: const TextStyle(
                                     color: AppColors.teal,
@@ -100,7 +99,7 @@ class _PackingChecklistPageState extends State<PackingChecklistPage> {
                                         setState(() => category = name)))
                         ])),
                     const SizedBox(height: 8),
-                    Row(children: [
+                    Wrap(runSpacing: 8, children: [
                       for (final name in ['All', 'Packed', 'Unpacked'])
                         Padding(
                             padding: const EdgeInsets.only(right: 8),

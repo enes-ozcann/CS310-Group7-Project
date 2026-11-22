@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_text_styles.dart';
-import '../../../models/expense_model.dart';
+import '../ab_alara/ab_theme.dart';
+import 'ss_expense_model.dart';
 
 class ExpenseCard extends StatelessWidget {
   final Expense expense;
@@ -38,7 +37,7 @@ class ExpenseCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: expense.categoryColor.withOpacity(0.12),
+                  color: expense.categoryColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -49,7 +48,7 @@ class ExpenseCard extends StatelessWidget {
               ),
               const SizedBox(width: 12),
 
-              // Title, Category • Date (Matches Figma Wireframe #6)
+              // Title, Category • Date
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +88,7 @@ class ExpenseCard extends StatelessWidget {
               ),
               const SizedBox(width: 4),
 
-              // Edit Action (Matches Wireframe #12: Harcama Düzenleme)
+              // Edit Action
               if (onEdit != null)
                 IconButton(
                   icon: const Icon(

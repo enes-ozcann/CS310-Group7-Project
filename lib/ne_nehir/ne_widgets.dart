@@ -32,6 +32,10 @@ class DestinationImage extends StatelessWidget {
         width: double.infinity,
         height: height,
         fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => SizedBox(
+          height: height,
+          child: const Center(child: Icon(Icons.landscape, size: 48)),
+        ),
       );
     }
     return Image.network(
@@ -40,11 +44,9 @@ class DestinationImage extends StatelessWidget {
       height: height,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
-        return Image.asset(
-          'assets/images/paris.png',
-          width: double.infinity,
+        return SizedBox(
           height: height,
-          fit: BoxFit.cover,
+          child: const Center(child: Icon(Icons.landscape, size: 48)),
         );
       },
     );

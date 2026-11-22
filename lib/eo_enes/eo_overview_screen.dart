@@ -78,7 +78,7 @@ class OverviewScreen extends StatelessWidget {
                         children: [
                           const Icon(Icons.calendar_month, color: AppColors.teal, size: 18),
                           const SizedBox(width: 8),
-                          Text(dates, style: AppText.bodyBold),
+                          Expanded(child: Text(dates, style: AppText.bodyBold)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -86,7 +86,7 @@ class OverviewScreen extends StatelessWidget {
                         children: [
                           const Icon(Icons.location_on, color: AppColors.teal, size: 18),
                           const SizedBox(width: 8),
-                          Text('Destination: $destination', style: AppText.body),
+                          Expanded(child: Text('Destination: $destination', style: AppText.body)),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -94,7 +94,7 @@ class OverviewScreen extends StatelessWidget {
                         children: [
                           const Icon(Icons.check_circle_outline, color: AppColors.teal, size: 18),
                           const SizedBox(width: 8),
-                          Text('Status: $packedStatus', style: AppText.body),
+                          Expanded(child: Text('Status: $packedStatus', style: AppText.body)),
                         ],
                       ),
                     ],

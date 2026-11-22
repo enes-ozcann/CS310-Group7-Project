@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../ab_alara/ab_theme.dart';
 
 class BudgetSummaryCard extends StatelessWidget {
@@ -40,15 +40,15 @@ class BudgetSummaryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Top Row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppColors.primary.withOpacity(0.1),
+                        color: AppColors.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
@@ -58,7 +58,7 @@ class BudgetSummaryCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Column(
+                    Expanded(child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text('Budget Overview', style: AppTextStyles.heading3),
@@ -67,15 +67,16 @@ class BudgetSummaryCard extends StatelessWidget {
                           style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
                         ),
                       ],
-                    ),
+                    )),
                   ],
                 ),
+                const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.12),
+                    color: statusColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: statusColor.withOpacity(0.3)),
+                    border: Border.all(color: statusColor.withValues(alpha: 0.3)),
                   ),
                   child: Text(
                     statusText,
@@ -173,7 +174,7 @@ class BudgetSummaryCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              Expanded(child: Text(
                 title,
                 style: const TextStyle(
                   fontSize: 9,
@@ -181,7 +182,7 @@ class BudgetSummaryCard extends StatelessWidget {
                   letterSpacing: 0.5,
                   color: AppColors.textMuted,
                 ),
-              ),
+              )),
               if (trailingIcon != null)
                 GestureDetector(
                   onTap: onTap,

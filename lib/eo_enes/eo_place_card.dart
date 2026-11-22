@@ -47,9 +47,10 @@ class PlaceCard extends StatelessWidget {
                     : Image.network(
                         place.image,
                         fit: BoxFit.cover,
-                        errorBuilder: (ctx, err, stack) => Image.asset(
-                          'assets/images/paris.png',
-                          fit: BoxFit.cover,
+                        errorBuilder: (ctx, err, stack) => Container(
+                          color: AppColors.tealLight,
+                          alignment: Alignment.center,
+                          child: const Icon(Icons.landscape, size: 48, color: AppColors.teal),
                         ),
                       ),
               ),

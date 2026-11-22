@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../ab_alara/ab_theme.dart';
 import 'ss_validator_utils.dart';
 import 'ss_expense_model.dart';
@@ -209,7 +209,7 @@ class _AddExpenseDialogState extends State<AddExpenseDialog> {
                 const Text('Category', style: AppTextStyles.caption),
                 const SizedBox(height: 4),
                 DropdownButtonFormField<ExpenseCategory>(
-                  value: _selectedCategory,
+                  initialValue: _selectedCategory,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.category_outlined, size: 20),
                   ),

@@ -246,12 +246,14 @@ class _ActiveTripCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        Wrap(
+                          spacing: 7,
+                          runSpacing: 4,
+                          crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             const Icon(Icons.luggage, color: AppColors.teal, size: 16),
                             const SizedBox(width: 7),
                             const Text('Packing Progress:', style: TextStyle(color: AppColors.muted, fontSize: 11)),
-                            const Spacer(),
                             Text('$packed/$totalPack Items (${(packRatio * 100).round()}%)', style: const TextStyle(color: AppColors.tealDark, fontSize: 10, fontWeight: FontWeight.bold)),
                           ],
                         ),
@@ -267,7 +269,10 @@ class _ActiveTripCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Row(
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       const Icon(Icons.account_balance_wallet_outlined, color: AppColors.teal, size: 17),
                       const SizedBox(width: 8),
@@ -278,7 +283,6 @@ class _ActiveTripCard extends StatelessWidget {
                           Text(budgetStr, style: const TextStyle(color: AppColors.navy, fontSize: 11, fontWeight: FontWeight.w800)),
                         ],
                       ),
-                      const Spacer(),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
                         decoration: BoxDecoration(color: const Color(0xFFF0F4F8), borderRadius: BorderRadius.circular(20)),

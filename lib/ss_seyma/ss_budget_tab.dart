@@ -1,11 +1,10 @@
-﻿import 'package:flutter/material.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_text_styles.dart';
-import '../../../models/expense_model.dart';
-import '../../../models/trip_model.dart';
-import '../widgets/add_expense_dialog.dart';
-import '../widgets/budget_summary_card.dart';
-import '../widgets/expense_card.dart';
+import 'package:flutter/material.dart';
+import '../ab_alara/ab_theme.dart';
+import 'ss_expense_model.dart';
+import 'ss_trip_model.dart';
+import 'ss_add_expense_dialog.dart';
+import 'ss_budget_summary_card.dart';
+import 'ss_expense_card.dart';
 
 class BudgetTab extends StatefulWidget {
   final Trip trip;
@@ -121,8 +120,10 @@ class _BudgetTabState extends State<BudgetTab> {
           const SizedBox(height: 16),
 
           // Header + Add Button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               const Text('Planned Expenses', style: AppTextStyles.heading2),
               ElevatedButton.icon(
