@@ -6,7 +6,7 @@ Term Project Step 2.2: UI Implementation & Wireframe Realization
 
 ---
 
-## 👥 Team Members & Contribution Prefixes
+## Team Members & Contribution Prefixes
 
 Every source file in `lib/` is explicitly prefixed with the author's initials so each member's contributions and individual git history are immediately identifiable:
 
@@ -20,7 +20,7 @@ Every source file in `lib/` is explicitly prefixed with the author's initials so
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 1. Ensure Flutter 3.x+ is installed.
 2. Fetch dependencies:
