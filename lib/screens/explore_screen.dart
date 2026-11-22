@@ -1,29 +1,55 @@
 import 'package:flutter/material.dart';
-import '../models/place.dart';
-import '../widgets/place_card.dart';
+import 'eo_place_model.dart';
+import 'eo_place_card.dart';
+import '../ab_alara/ab_theme.dart';
+import '../ne_nehir/ne_widgets.dart';
 
-// sample data without an API or database
+// Unified sample places incorporating local and network images (Rubric Constraint 5)
 const List<Place> samplePlaces = [
   Place(
     id: 'colosseum',
-    name: 'Colosseum',
+    name: 'Colosseum & Roman Forum',
     city: 'Rome',
     category: 'Historical',
-    description: 'Explore the ancient amphitheatre in Rome.',
+    description: 'Explore the ancient amphitheatre and historic ruins in Rome.',
+    image: 'assets/images/rome.png',
+    isLocal: true,
   ),
   Place(
     id: 'eiffel-tower',
     name: 'Eiffel Tower',
     city: 'Paris',
     category: 'Landmark',
-    description: 'Enjoy the city views around the Eiffel Tower.',
+    description: 'Enjoy the iconic city views and gardens around the Eiffel Tower.',
+    image: 'assets/images/paris.png',
+    isLocal: true,
   ),
   Place(
-    id: 'historic-istanbul',
-    name: 'Historic Istanbul',
-    city: 'Istanbul',
-    category: 'Historical',
-    description: 'Discover historic streets and architecture.',
+    id: 'louvre-museum',
+    name: 'Louvre Museum',
+    city: 'Paris',
+    category: 'Museum',
+    description: 'Discover famous artworks and historic galleries in the Louvre Museum.',
+    image: 'https://picsum.photos/id/1031/900/500',
+    isLocal: false, // Network image demonstration
+  ),
+  Place(
+    id: 'park-guell',
+    name: 'Park Güell',
+    city: 'Barcelona',
+    category: 'Architecture',
+    description: 'See colorful Gaudi architecture and panoramic views of Barcelona.',
+    image: 'assets/images/barcelona.png',
+    isLocal: true,
+  ),
+  Place(
+    id: 'senso-ji',
+    name: 'Senso-ji Temple',
+    city: 'Tokyo',
+    category: 'Cultural',
+    description: 'Explore a historic Buddhist temple and traditional market in Tokyo.',
+    image: 'assets/images/tokyo.png',
+    isLocal: true,
   ),
 ];
 
@@ -33,13 +59,10 @@ class ExploreScreen extends StatefulWidget {
     this.onPlaceSelected,
   });
 
-  // passes the selected place to the details screen
   final void Function(Place)? onPlaceSelected;
 
   @override
-  State<ExploreScreen> createState() {
-    return _ExploreScreenState();
-  }
+  State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
@@ -50,16 +73,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
     'All',
     'Historical',
     'Landmark',
+    'Museum',
+    'Architecture',
+    'Cultural',
   ];
 
-  // searches the beginning of the place name or city name
   List<Place> _getFilteredPlaces() {
     List<Place> results = [];
 
     for (Place place in samplePlaces) {
       bool matchesSearch =
-          place.name.toUpperCase().startsWith(_searchText) ||
-          place.city.toUpperCase().startsWith(_searchText);
+          place.name.toUpperCase().contains(_searchText) ||
+          place.city.toUpperCase().contains(_searchText);
 
       bool matchesCategory =
           _selectedCategory == 'All' ||
@@ -73,39 +98,53 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return results;
   }
 
+  void _openDetails(Place place) {
+    if (widget.onPlaceSelected != null) {
+      widget.onPlaceSelected!(place);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PlaceDetailsScreen(place: place),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Place> places = _getFilteredPlaces();
 
-    // a local variable allows a normal null check
-    final openDetails = widget.onPlaceSelected;
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Explore'),
+        title: const Text('Explore Destinations'),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                'Explore Destinations',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                'Discover Places',
+                style: AppText.heading,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
               const Text(
-                'Find places to visit on your next trip.',
+                'Find attractions and monuments for your next journey.',
+                style: AppText.body,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 14),
               TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Search places or cities',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: 'Search places or cities...',
+                  prefixIcon: const Icon(Icons.search, color: AppColors.teal),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: AppColors.cardBorder),
+                  ),
                 ),
                 onChanged: (String value) {
                   setState(() {
@@ -114,50 +153,62 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 },
               ),
               const SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: _categories.map((String category) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        _selectedCategory = category;
-                      });
-                    },
-                    child: Text(
-                      _selectedCategory == category
-                          ? '$category (selected)'
-                          : category,
-                    ),
-                  );
-                }).toList(),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: _categories.map((String category) {
+                    final isSelected = _selectedCategory == category;
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: FilterChip(
+                        selected: isSelected,
+                        label: Text(category),
+                        labelStyle: TextStyle(
+                          color: isSelected ? Colors.white : AppColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                        selectedColor: AppColors.teal,
+                        backgroundColor: Colors.white,
+                        checkmarkColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(
+                            color: isSelected ? AppColors.teal : AppColors.cardBorder,
+                          ),
+                        ),
+                        onSelected: (selected) {
+                          setState(() {
+                            _selectedCategory = category;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
               const SizedBox(height: 12),
-              Text('${places.length} places found'),
+              Text(
+                '${places.length} places found',
+                style: AppText.caption,
+              ),
               const SizedBox(height: 8),
-
-              // the list uses the remaining screen height
               Expanded(
                 child: places.isEmpty
                     ? const Center(
                         child: Text(
-                          'No places match your search.\n'
-                          'Try another search or category.',
+                          'No places match your search.\nTry another query or category.',
                           textAlign: TextAlign.center,
+                          style: AppText.body,
                         ),
                       )
                     : ListView.builder(
                         itemCount: places.length,
                         itemBuilder: (context, index) {
-                          Place place = places[index];
-
+                          final place = places[index];
                           return PlaceCard(
                             place: place,
-                            onDetailsTap: openDetails == null
-                                ? null
-                                : () {
-                                    openDetails(place);
-                                  },
+                            onDetailsTap: () => _openDetails(place),
                           );
                         },
                       ),
