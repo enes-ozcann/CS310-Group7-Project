@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../shared/general_style.dart';
-import '../widgets/ui_components.dart';
-import '../models/packing_item.dart';
+import 'ab_general_style.dart';
+import 'ab_ui_components.dart';
+import 'ab_packing_item_model.dart';
+import 'ab_theme.dart';
 
 class AddItemPage extends StatefulWidget {
   const AddItemPage({super.key});

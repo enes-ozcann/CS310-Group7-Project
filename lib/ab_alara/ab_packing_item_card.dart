@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme.dart';
-import '../shared/general_style.dart';
-import '../widgets/ui_components.dart';
-import '../models/packing_item.dart';
+import 'ab_theme.dart';
+import 'ab_general_style.dart';
+import 'ab_ui_components.dart';
+import 'ab_packing_item_model.dart';
 
 class PackingItemCard extends StatelessWidget {
   const PackingItemCard(

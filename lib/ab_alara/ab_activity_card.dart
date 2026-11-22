@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme.dart';
-import '../shared/general_style.dart';
-import '../widgets/ui_components.dart';
-import '../models/activity.dart';
+import 'ab_theme.dart';
+import 'ab_general_style.dart';
+import 'ab_ui_components.dart';
+import 'ab_activity_model.dart';
 
 class ActivityPreviewCard extends StatelessWidget {
   const ActivityPreviewCard({super.key, required this.activity});

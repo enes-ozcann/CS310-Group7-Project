@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../shared/general_style.dart';
-import '../widgets/ui_components.dart';
-import '../data/preview_data.dart';
-import '../widgets/place_card.dart';
-import '../widgets/activity_card.dart';
+import 'ab_general_style.dart';
+import 'ab_ui_components.dart';
+import 'ab_preview_data.dart';
+import 'ab_place_card.dart';
+import 'ab_activity_card.dart';
+import 'ab_theme.dart';
 
 class PlacesActivitiesPage extends StatelessWidget {
   const PlacesActivitiesPage({super.key});
@@ -47,7 +48,7 @@ class PlacesActivitiesPage extends StatelessWidget {
                               icon: const Icon(Icons.add_location_alt_outlined),
                               label: const Text('Add a Place from Explore')),
                           for (final place in previewPlaces)
-                            PlacePreviewCard(place: place),
+                            PlaceCard(place: place),
                         ])),
                     sectionGap,
                     UiPanel(

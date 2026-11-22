@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../theme.dart';
-import '../shared/general_style.dart';
+import 'ab_theme.dart';
+import 'ab_general_style.dart';
 
 // A normal Row replaces rich text and inline widget spans.
 class UiBadge extends StatelessWidget {

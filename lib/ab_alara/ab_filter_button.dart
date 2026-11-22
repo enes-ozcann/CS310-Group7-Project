@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../theme.dart';
-import '../shared/general_style.dart';
+import 'ab_theme.dart';
+import 'ab_general_style.dart';
 
 // The same ordinary button is reused for category and packed-status filters.
 class FilterButton extends StatelessWidget {
