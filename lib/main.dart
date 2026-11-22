@@ -1,3 +1,5 @@
+import 'screens/explore_screen.dart';
+import 'screens/overview_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Home Page'),
+      home: const ExploreScreen(),
     );
   }
 }
